@@ -1,42 +1,33 @@
 <template>
   <div>
-    <div class="quote" v-for="quote in quotes">
-      <p>{{ quote  }}</p>
-    </div>
+    <quote v-for="(quote, i) in quotes"
+      @click.native="deleteQuote(quote)"
+      :key="quote.id"
+      :quote="quote">
+    </quote>
   </div>
 </template>
 
 <script>
+import { eventBus } from '../main'
+import Quote from './Quote.vue'
 export default {
   props: {
     quotes: {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    deleteQuote: (quote) => {
+      eventBus.$emit('quoteWasDeleted', quote)
+    }
+  },
+  components: {
+    quote: Quote
   }
 }
 </script>
 
 <style scoped>
-.quote {
-  display: inline-block;
-  margin: 15px;
-  border: 1px #eee solid;
-  border-radius: 5px;
-  width: 30%;
-}
-
-p {
-  margin: 0;
-  padding: 15px;
-  text-align: center;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  font-size: 24px;
-}
-
-.quote:hover {
-  background-color: #d9534f;
-  color: #fff;
-  cursor: pointer;
-}
 </style>

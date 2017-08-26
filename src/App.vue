@@ -17,9 +17,9 @@ export default {
   data: () => {
     return {
       quotes: [
-        "Never gonna give you up",
-        "Never gonna let you down",
-        "Never gonna run around and desert you",
+        { id: 1, message: "Never gonna give you up" },
+        { id: 2, message: "Never gonna let you down" },
+        { id: 3, message: "Never gonna run around and desert you"},
       ]
     }
   },
@@ -37,9 +37,23 @@ export default {
         alert('You had enough of these damn quotes!');
       }
     })
+    eventBus.$on('quoteWasDeleted', (quote) => {
+      let indexToDelete = -1;
+      for(let i = 0; i < this.quotes.length; i++) {
+        let q = this.quotes[i]
+        if (quote.id === q.id) {
+          indexToDelete = i
+          break
+        }
+      }
+      if (indexToDelete > -1) {
+        this.quotes.splice(indexToDelete, 1)
+      }
+    })
   }
 }
 </script>
+
 <style scoped>
 .container {
   margin: 50px auto;
