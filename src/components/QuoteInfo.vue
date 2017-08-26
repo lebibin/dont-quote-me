@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
 div {
-  margin: 25px 0;
+  margin-bottom: 25px;
   height: 50px;
   border-radius: 5px;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <quote-count :quotes="quotes"></quote-count>
+    <quote-count :quotes="quotes" :quoteLimit="quoteLimit"></quote-count>
     <quote-info></quote-info>
     <quote-form></quote-form>
     <quote-grid :quotes="quotes"></quote-grid>
@@ -16,6 +16,7 @@ import QuoteInfo from './components/QuoteInfo.vue'
 export default {
   data: () => {
     return {
+      quoteLimit: 10,
       quotes: [
         { id: 1, message: "Never gonna give you up" },
         { id: 2, message: "Never gonna let you down" },
@@ -31,7 +32,7 @@ export default {
   },
   created() {
     eventBus.$on('quoteWasAdded', (quote) => {
-      if (this.quotes.length < 10) {
+      if (this.quotes.length < this.quoteLimit) {
         this.quotes.unshift(quote)
       } else {
         alert('You had enough of these damn quotes!');
@@ -49,6 +50,9 @@ export default {
       if (indexToDelete > -1) {
         this.quotes.splice(indexToDelete, 1)
       }
+    })
+    eventBus.$on('increaseQuoteLimit', () => {
+      this.quoteLimit++
     })
   }
 }
