@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { eventBus } from './main'
 import QuoteCount from './components/QuoteCount.vue'
 import QuoteForm from './components/QuoteForm.vue'
 import QuoteGrid from './components/QuoteGrid.vue'
@@ -27,6 +28,15 @@ export default {
     quoteForm: QuoteForm,
     quoteGrid: QuoteGrid,
     quoteInfo: QuoteInfo
+  },
+  created() {
+    eventBus.$on('quoteWasAdded', (quote) => {
+      if (this.quotes.length < 10) {
+        this.quotes.push(quote)
+      } else {
+        alert('You had enough of these damn quotes!');
+      }
+    })
   }
 }
 </script>
