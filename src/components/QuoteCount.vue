@@ -2,9 +2,13 @@
   <div>
     <h1>{{ title }}</h1>
     <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="0"
-        aria-valuemin="0" aria-valuemax="100" style="width:0%">
-        <span>0/10</span>
+      <div class="progress-bar"
+        role="progressbar"
+        :aria-valuenow="countPercentage"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        :style="{ width: (quotes.length * 10) + '%'}">
+        <span>{{ quotes.length }}/10</span>
       </div>
     </div>
   </div>
@@ -12,6 +16,12 @@
 
 <script>
 export default {
+  props: {
+    quotes: {
+      type: Array,
+      required: true
+    }
+  },
   data: () => {
     return {
       title: 'Quotes Added'
