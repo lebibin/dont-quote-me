@@ -8,21 +8,20 @@
 
 <script>
 import { quotes } from './../data/quotes'
-import { eventBus  } from '../main'
 export default {
-  data: () => {
+  data() {
     return {
       info: "Info: Click on a Quote to delete it!"
     }
   },
   methods: {
-    surpriseMe: () => {
+    surpriseMe() {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
       let min = 0;
       let max = quotes.length;
       let index =  Math.floor(Math.random() * (max - min)) + min;
       let quote = quotes[index]
-      eventBus.$emit('quoteWasAdded', quote)
+      this.$emit('quoteWasAdded', quote)
     }
   }
 }

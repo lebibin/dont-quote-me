@@ -19,9 +19,8 @@
 </template>
 
 <script>
-import { eventBus } from '../main'
 export default {
-  data: () => {
+  data() {
     return {
       quote: {
         message: "",
@@ -30,13 +29,13 @@ export default {
     }
   },
   methods: {
-    quoteMe: function(event) {
+    quoteMe() {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
       let min = 4;
       let max = Number.MAX_SAFE_INTEGER;
       let id =  Math.floor(Math.random() * (max - min)) + min;
       let quote = this.quote.message;
-      eventBus.$emit('quoteWasAdded', {
+      this.$emit('quoteWasAdded', {
         message: quote,
         id: id
       })

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { eventBus } from '../main'
 import Quote from './Quote.vue'
 export default {
   props: {
@@ -19,8 +18,8 @@ export default {
     }
   },
   methods: {
-    deleteQuote: (quote) => {
-      eventBus.$emit('quoteWasDeleted', quote)
+    deleteQuote(quote) {
+      this.$emit('quoteWasDeleted', quote)
     }
   },
   components: {

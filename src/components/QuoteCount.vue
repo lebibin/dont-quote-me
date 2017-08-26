@@ -4,7 +4,7 @@
       {{ title }}
     </h1>
     <p>
-      <small style="float:left" @click="increaseLimit">
+      <small style="float:left" @click="buyQuotes">
         buy more quotes...
       </small>
       <span style="float:right">{{ quotes.length }} / {{ quoteLimit }}</span>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { eventBus } from '../main'
 export default {
   props: {
     quoteLimit: {
@@ -36,11 +35,11 @@ export default {
     }
   },
   methods: {
-    increaseLimit: () => {
-      eventBus.$emit('increaseQuoteLimit')
+    buyQuotes() {
+      this.$emit('quoteLimitWasIncreased')
     }
   },
-  data: () => {
+  data() {
     return {
       title: 'Quotes'
     }
