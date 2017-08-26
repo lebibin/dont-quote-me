@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <quote-count :quotes="quotes"></quote-count>
+    <quote-info></quote-info>
     <quote-form></quote-form>
     <quote-grid :quotes="quotes"></quote-grid>
-    <quote-info></quote-info>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
   created() {
     eventBus.$on('quoteWasAdded', (quote) => {
       if (this.quotes.length < 10) {
-        this.quotes.push(quote)
+        this.quotes.unshift(quote)
       } else {
         alert('You had enough of these damn quotes!');
       }
